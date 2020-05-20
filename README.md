@@ -1,5 +1,5 @@
 <!-- PROJECT LOGO -->
-# ruby-bubble-sort
+# Tic-Tac-Toe-game
 A simple bubble sort algorithm created on Ruby.
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
