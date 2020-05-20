@@ -1,16 +1,28 @@
 #!/usr/bin/env ruby
 
+# creating the instance of the game
+#   loop ends if win/loss or 9 movements done
+#     user inputs alternating between the 2 users
+#     validate if win/draw
+#     print board if no win
+#     win/loss announce if win/draw
+# end
+
 # GAME CLASS
 class Game
-  def initialize
   
+  @player = Array.new(2)
+
+  def initialize
+    @valiadator = Validator.new
+    greeting
   end
 
   def greeting
     puts "Hello! Welcome to Tic-Tac-Toe!"
     puts "Please Select your symbol"
-    player_A = Player.new
-    player_B = Player.new
+    (0...@player.size).each{|player| player = Player.new(@valiadator.get_symbol)}
+    @board = Board.new
   end
 
   def user_input
@@ -27,11 +39,21 @@ class Game
     # Congratulations! yOu've won!
     # Boohoo you've lost player bla
   end
-
 end
 
+class Player
+  @symbol
+  def initialize
+    puts 'player'
+  end
 
-class Players
+  def x
+    @symbol = 'x'
+  end
+
+  def o
+    @symbol = 'o'
+  end
   # gets.chomp of Player inputs
   # receives user input
   # returns user input to validator class
@@ -42,6 +64,14 @@ class Players
 end
 
 class Validator
+
+  def initialize
+    puts 'validator'
+  end
+
+  def get_symbol
+
+  end
   # VALIDATION PART 1
   # gets all inputs from Game Class and Players Class
   # Validates
@@ -60,3 +90,13 @@ class Validator
     # Check if WIN is by X or O return WINNER & LOSER
   # else continue game
 end
+
+class Board
+  def initialize
+    puts 'board'
+  end
+end
+
+
+
+Game.new
