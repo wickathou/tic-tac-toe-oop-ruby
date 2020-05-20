@@ -1,3 +1,62 @@
 #!/usr/bin/env ruby
 
-puts 'Hello World'
+# GAME CLASS
+class Game
+  def initialize
+  
+  end
+
+  def greeting
+    puts "Hello! Welcome to Tic-Tac-Toe!"
+    puts "Please Select your symbol"
+    player_A = Player.new
+    player_B = Player.new
+  end
+
+  def user_input
+    #take user input
+    #receive validated input
+  end
+
+  def print_move
+    #receive validated input
+    #print new board with validated input
+  end
+
+  def win_lost_announce
+    # Congratulations! yOu've won!
+    # Boohoo you've lost player bla
+  end
+
+end
+
+
+class Players
+  # gets.chomp of Player inputs
+  # receives user input
+  # returns user input to validator class
+  # receive from valiator class
+  # return to Game Class
+  # Player A is always ❌
+  # Player B is always 🔵
+end
+
+class Validator
+  # VALIDATION PART 1
+  # gets all inputs from Game Class and Players Class
+  # Validates
+  # if player_input == true return value to corresponding class
+  # else return "Sorry, invalid input. Try again"
+
+  # VALIDATION PART 2
+  # gets position input from Board Class
+  # Validates
+  # if postion_input == avlbl position return to corresponding Class
+  # else return "Sorry, that spot is already taken, please select another # from 1-9"
+
+  # VALIDATION PART 3
+  # Receive board_status (Available/Unavailable spots)
+  # Check if | or \ or --- positions are filled return WIN
+    # Check if WIN is by X or O return WINNER & LOSER
+  # else continue game
+end
