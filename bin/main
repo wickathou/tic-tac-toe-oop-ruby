@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'tty-prompt'
 # creating the instance of the game
 #   loop ends if win/loss or 9 movements done
 #     user inputs alternating between the 2 users
@@ -9,33 +10,29 @@
 # end
 
 # GAME CLASS
+  # MAGA
 class Game
-  
-    acce
   def initialize
-    # @valiadator = Validator.new
     greeting
+    start_decision_maker
+    user_input
   end
 
   def greeting
     puts "Hello! Welcome to Tic-Tac-Toe!"
-    puts "Please Select, Would you like to be Player A or Player B?"
-    puts "Player ❌ or Player 🔵"
-    player_o = gets.chomp
-    player_x = gets.chomp
-    x
-
+    puts "Please Select, Would you like to be Player ❌ or Player 🔵?"
     # (0..1).each{|player| player = Player.new(@valiadator.get_symbol)}
     # @board = Board.new
   end
 
+  def start_decision_maker
+    @decision_maker = Decision_Maker.new
+    puts @decision_maker.response_message
+  end
 
-=begin
   def user_input
-    #take user input
-    player_x = gets.chomp
-    player_o = gets.chomp
-    #receive validated input
+    @decision_maker.get_move
+    puts @decision_maker.response_message
   end
 
   def print_move
@@ -50,36 +47,59 @@ class Game
 end
 
 class Player
-  @symbol
-  def initialize
-    puts 'player'
+  def initialize(symbol)
+    @symbol = symbol
   end
 
-  def x
-    @symbol = 'x'
+  def to_s
+    @symbol
   end
+end
 
-  def o
-    @symbol = 'o'
-  end
   # gets.chomp of Player inputs
   # receives user input
-  # returns user input to validator class
+  # returns user input to Decision_Maker class
   # receive from valiator class
   # return to Game Class
   # Player A is always ❌
   # Player B is always 🔵
-end
 
-class Validator
-
+class Decision_Maker
+  attr_accessor :response_message
   def initialize
-    puts 'validator'
+    get_symbol
+    get_board
   end
 
   def get_symbol
-
+    @players = []
+    # This creates the selector where the users chooses their symbol
+    symbol_list = ['❌','🔵']
+    prompt = TTY::Prompt.new
+    symb = prompt.enum_select("Player 1! Select your symbol?", symbol_list)
+    # This stores the player objects in an instance array
+    @players << Player.new(symb)
+    @players << Player.new(symbol_list.select{|x| x!=symb}[0])
+    # This returns a response message to be printed
+    @response_message = "Player 1 chose #{@players[0]}, player 2 get #{@players[1]}"
   end
+
+  def get_board
+    @board = Board.new
+  end
+
+  def get_move
+    # This creates the selector where the users chooses their symbol
+    @moves = (1..9).to_a
+    prompt = TTY::Prompt.new
+    move = prompt.enum_select("make a move?", @moves)
+    # This stores the player objects in an instance array
+    # @players << Player.new(symb)
+    # @players << Player.new(symbol_list.select{|x| x!=symb}[0])
+    # This returns a response message to be printed
+    @response_message = "Awesome! You have coronavirus, don't take vaccines, drink fabuloso+cloralex #{move}"
+  end
+end
   # VALIDATION PART 1
   # gets all inputs from Game Class and Players Class
   # Validates
@@ -97,15 +117,10 @@ class Validator
   # Check if | or \ or --- positions are filled return WIN
     # Check if WIN is by X or O return WINNER & LOSER
   # else continue game
-end
 
 class Board
   def initialize
     puts 'board'
   end
-=end
 end
-
-
-
 Game.new
