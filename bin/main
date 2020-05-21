@@ -11,22 +11,30 @@
 # GAME CLASS
 class Game
   
-  @player = Array.new(2)
-
+    acce
   def initialize
-    @valiadator = Validator.new
+    # @valiadator = Validator.new
     greeting
   end
 
   def greeting
     puts "Hello! Welcome to Tic-Tac-Toe!"
-    puts "Please Select your symbol"
-    (0...@player.size).each{|player| player = Player.new(@valiadator.get_symbol)}
-    @board = Board.new
+    puts "Please Select, Would you like to be Player A or Player B?"
+    puts "Player ❌ or Player 🔵"
+    player_o = gets.chomp
+    player_x = gets.chomp
+    x
+
+    # (0..1).each{|player| player = Player.new(@valiadator.get_symbol)}
+    # @board = Board.new
   end
 
+
+=begin
   def user_input
     #take user input
+    player_x = gets.chomp
+    player_o = gets.chomp
     #receive validated input
   end
 
@@ -95,6 +103,7 @@ class Board
   def initialize
     puts 'board'
   end
+=end
 end
 
 
