@@ -74,10 +74,14 @@ class Decision_Maker
   # once games starts requests 1st move until no more spots are avlbl on board
   def move_sequence
     starting_move
+    move
+    puts @board.the_actual_board
+
     until @moves.nil?
       current_player
-      move
       get_move
+      move
+      puts @board.the_actual_board
     end
   end
   
@@ -95,23 +99,25 @@ class Decision_Maker
 
   def move
     puts @response_message = "Okay #{@player_turn} it's your turn"
+    @board.print_move(@move, @player_turn)
   end
 
   def starting_move
     # This creates the selector where the users chooses their symbol
     prompt = TTY::Prompt.new
-    move = prompt.enum_select("make a move?", @moves)
-    position_remover(move)
-    @response_message = "Awesome! You have moved to space #{move}!"
+    @move = prompt.enum_select("make a move?", @moves)
+    position_remover(@move)
+    @response_message = "Awesome! You have moved to space #{@move}!"
   end
 
   def get_move
     prompt = TTY::Prompt.new
-    move = prompt.enum_select("make a move?", @moves)
-    position_remover(move)
-    @response_message = "Awesome! You have moved to space #{move}!"
+    @move = prompt.enum_select("make a move?", @moves)
+    position_remover(@move)
+    @response_message = "Awesome! You have moved to space #{@move}!"
   end
 
+  # removes options form the prompt as they become selected
   def position_remover(position)
     @moves.delete(position)
   end
@@ -120,10 +126,10 @@ end
 
 class Board
   def initialize
+    @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     the_actual_board
   end
   def the_actual_board
-    @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     board_array = [
       " #{@board[0]} | #{@board[1]} | #{@board[2]} ",
       '-----------',
@@ -132,8 +138,9 @@ class Board
       " #{@board[6]} | #{@board[7]} | #{@board[8]} "
     ]
   end
-  def print_move()
 
+  def print_move(move, player_turn)
+    @board[move.to_i-1] = player_turn
   end
 end
 
