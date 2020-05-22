@@ -23,6 +23,7 @@ class Game
 
   def user_input
     @decision_maker.move_sequence
+    puts @decision_maker.response_message
   end
 
   def create_board
@@ -60,20 +61,40 @@ class Decision_Maker
     symb = prompt.enum_select("Player 1! Select your symbol?", symbol_list)
     # This stores the player objects in an instance array
     @players << Player.new(symb)
+    @player_turn = @players[0]
     @players << Player.new(symbol_list.select{|x| x!=symb}[0])
     # This returns a response message to be printed
-    @response_message = "Player 1 chose #{@players[0]}, player 2 get #{@players[1]}"
+    @response_message = "Player 1 chose #{@players[0]}, Player 2 get #{@players[1]}"
   end
 
   def get_board
     @board = Board.new
   end
 
+  # once games starts requests 1st move until no more spots are avlbl on board
   def move_sequence
     starting_move
     until @moves.nil?
+      current_player
+      move
       get_move
     end
+  end
+  
+  #alternates turns between players
+  def current_player
+    player1 = @players[0]
+    player2 = @players[1]
+  
+    if @player_turn == player1
+      @player_turn = player2
+      else 
+      @player_turn = player1
+    end
+  end
+
+  def move
+    puts @response_message = "Okay #{@player_turn} it's your turn"
   end
 
   def starting_move
