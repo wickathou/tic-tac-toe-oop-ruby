@@ -22,8 +22,7 @@ class Game
   end
 
   def user_input
-    @decision_maker.get_move
-    puts @decision_maker.response_message
+    @decision_maker.move_sequence
   end
 
   def create_board
@@ -46,10 +45,11 @@ class Player
 end
   
 class Decision_Maker
-  attr_accessor :response_message
+  attr_reader :response_message
   def initialize
     get_symbol
     get_board
+    @moves = {'1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9'}
   end
 
   def get_symbol
@@ -69,12 +69,30 @@ class Decision_Maker
     @board = Board.new
   end
 
-  def get_move
+  def move_sequence
+    starting_move
+    until @moves.nil?
+      get_move
+    end
+  end
+
+  def starting_move
     # This creates the selector where the users chooses their symbol
-    @moves = (1..9).to_a
     prompt = TTY::Prompt.new
     move = prompt.enum_select("make a move?", @moves)
+    position_remover(move)
     @response_message = "Awesome! You have moved to space #{move}!"
+  end
+
+  def get_move
+    prompt = TTY::Prompt.new
+    move = prompt.enum_select("make a move?", @moves)
+    position_remover(move)
+    @response_message = "Awesome! You have moved to space #{move}!"
+  end
+
+  def position_remover(position)
+    @moves.delete(position)
   end
 end
 
@@ -84,10 +102,17 @@ class Board
     the_actual_board
   end
   def the_actual_board
-    board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-    board_arra = [" #{board[0]} | #{board[1]} | #{board[2]} ", '-----------',
-     " #{board[3]} | #{board[4]} | #{board[5]} ", '-----------',
-     " #{board[6]} | #{board[7]} | #{board[8]} "]
+    @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    board_array = [
+      " #{@board[0]} | #{@board[1]} | #{@board[2]} ",
+      '-----------',
+      " #{@board[3]} | #{@board[4]} | #{@board[5]} ",
+      '-----------',
+      " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+    ]
+  end
+  def print_move()
+
   end
 end
 
