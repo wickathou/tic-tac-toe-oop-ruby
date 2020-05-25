@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'tty-prompt'
-require_relative '../lib/player'
+
 require_relative '../lib/decision_maker'
-require_relative '../lib/board'
 
 # GAME CLASS
 class Game
