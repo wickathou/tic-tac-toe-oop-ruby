@@ -20,3 +20,4 @@ class Board
     @board[move.to_i-1] = player_turn
   end
 end
+
