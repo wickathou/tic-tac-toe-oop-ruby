@@ -9,6 +9,7 @@ class Game
     start_decision_maker
     create_board
     user_input
+    check_for_winner
   end
 
   def greeting
@@ -47,6 +48,9 @@ end
   
 class Decision_Maker
   attr_reader :response_message
+  # possibilities        [0]      [1]       [2]       [3]       [4]     [5]       [6]     [7]
+  WIN_POSSIBILITIES = [[0,1,2], [3,4,5], [6, 7, 8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+
   def initialize
     get_symbol
     get_board
@@ -81,6 +85,7 @@ class Decision_Maker
       current_player
       get_move
       move
+      check_for_winner
       puts @board.the_actual_board
     end
   end
@@ -123,31 +128,28 @@ class Decision_Maker
   end
 
   #checks for win
-  def check_win
-    if horizontal(player/symbol) || vertical(player/symbol) || diagonal(player/symbol)
-    win = player/symbol
+  def check_for_winner
+    WIN_POSSIBILITIES.each do |possibilities|
+      case @board.board.values_at(*possibilities)
+      when %w(o o o)
+        return 'Player 1 wins'
+      when %w(x x x)
+        return 'Player 2 wins'
+      end
+    end
   end
-  
-  def horizontal(player/symbol)
-    if @board[0] == player/symbol && @board[1] == player/symbol && @board[2] == player/symbol ||
-    2nd combo ||
-    3rd combo
-    return player/symbol
-  end
-  
-  def vertical same
-  end
-  
-  def diagonal same
-  end
+
 end
 
 
 class Board
+  attr_reader :board
+
   def initialize
     @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     the_actual_board
   end
+
   def the_actual_board
     board_array = [
       " #{@board[0]} | #{@board[1]} | #{@board[2]} ",
