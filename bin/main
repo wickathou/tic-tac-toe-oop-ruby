@@ -9,7 +9,6 @@ class Game
     start_decision_maker
     create_board
     user_input
-    check_for_winner
   end
 
   def greeting
@@ -85,7 +84,9 @@ class Decision_Maker
       current_player
       get_move
       move
-      check_for_winner
+      if check_for_winner
+        break
+      end
       puts @board.the_actual_board
     end
   end
