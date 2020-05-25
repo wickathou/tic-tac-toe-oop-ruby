@@ -7,5 +7,4 @@ class Player
   def to_s
     @symbol
   end
-  
 end

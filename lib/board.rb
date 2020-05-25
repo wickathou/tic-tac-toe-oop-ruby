@@ -2,7 +2,7 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    @board = %w[1 2 3 4 5 6 7 8 9]
     the_actual_board
   end
 
@@ -17,7 +17,6 @@ class Board
   end
 
   def print_move(move, player_turn)
-    @board[move.to_i-1] = player_turn
+    @board[move.to_i - 1] = player_turn
   end
 end
-
