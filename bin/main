@@ -24,7 +24,7 @@ class Game
 
   def start_decision_maker
     puts 'Please Select, Would you like to be Player ❌ or Player 🔵?'
-    @decision_maker = Decision_Maker.new
+    @decision_maker = DecisionMaker.new
     puts @decision_maker.response_message
   end
 
