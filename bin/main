@@ -121,6 +121,25 @@ class Decision_Maker
   def position_remover(position)
     @moves.delete(position)
   end
+
+  #checks for win
+  def check_win
+    if horizontal(player/symbol) || vertical(player/symbol) || diagonal(player/symbol)
+    win = player/symbol
+  end
+  
+  def horizontal(player/symbol)
+    if @board[0] == player/symbol && @board[1] == player/symbol && @board[2] == player/symbol ||
+    2nd combo ||
+    3rd combo
+    return player/symbol
+  end
+  
+  def vertical same
+  end
+  
+  def diagonal same
+  end
 end
 
 
