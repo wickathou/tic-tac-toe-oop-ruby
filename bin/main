@@ -10,7 +10,7 @@ class Game
     greeting
     new_game
   end
-  
+
   def new_game
     start_decision_maker
     user_input
@@ -19,11 +19,11 @@ class Game
   end
 
   def greeting
-    puts "Tic Tac Toe: two rivals, two symbols, only one chance to win..."
+    puts 'Tic Tac Toe: two rivals, two symbols, only one chance to win...'
   end
 
   def start_decision_maker
-    puts "Please Select, Would you like to be Player ❌ or Player 🔵?"
+    puts 'Please Select, Would you like to be Player ❌ or Player 🔵?'
     @decision_maker = Decision_Maker.new
     puts @decision_maker.response_message
   end
@@ -31,16 +31,16 @@ class Game
   def user_input
     @decision_maker.move_sequence
   end
-  
+
   def end_game
     puts @decision_maker.response_message
   end
-  
+
   def restart
-  prompt = TTY::Prompt.new
-  new_game if prompt.yes?('Play again?'){|ans|
-    ans.default false
-  }
+    prompt = TTY::Prompt.new
+    new_game if prompt.yes?('Play again?') do |ans|
+      ans.default false
+    end
   end
 end
 
