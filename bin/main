@@ -14,7 +14,6 @@ class Game
   def new_game
     start_decision_maker
     user_input
-    end_game
     restart
   end
 
@@ -26,13 +25,29 @@ class Game
     puts 'Please Select, Would you like to be Player ❌ or Player 🔵?'
     @decision_maker = DecisionMaker.new
     puts @decision_maker.response_message
+    board_printer
   end
 
   def user_input
-    @decision_maker.move_sequence
+    until @decision_maker.winner || @decision_maker.moves.empty?
+      new_move
+      board_printer
+      next_player
+    end
   end
-
-  def end_game
+  
+  def new_move
+    @decision_maker.move_get
+    puts @decision_maker.response_message
+  end
+  
+  def next_player
+    @decision_maker.move_sequence
+    puts @decision_maker.response_message
+  end
+  
+  def board_printer
+    @decision_maker.print_board
     puts @decision_maker.response_message
   end
 

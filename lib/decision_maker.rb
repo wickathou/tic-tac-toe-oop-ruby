@@ -2,11 +2,12 @@ require_relative '../lib/player'
 require_relative '../lib/board'
 
 class DecisionMaker
-  attr_reader :response_message
+  attr_reader :response_message, :winner, :moves
   # possibilities        [0]     [1]      [2]      [3]      [4]    [5]      [6]    [7]
   WIN_POSSIBILITIES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].freeze
 
   def initialize
+    @winner = nil
     symbol_get
     board_get
     @moves = { '1' => '1', '2' => '2', '3' => '3', '4' => '4',
@@ -24,7 +25,7 @@ class DecisionMaker
     @player_turn = @players[0]
     @players << Player.new(symbol_list.reject { |x| x == symb }[0])
     # This returns a response message to be printed
-    puts "Player 1 is #{@players[0]} so Player 2 gets #{@players[1]}"
+    @response_message = "Player 1 is #{@players[0]} so Player 2 gets #{@players[1]}"
   end
 
   def board_get
@@ -33,30 +34,26 @@ class DecisionMaker
 
   # once games starts requests 1st move until no more spots are avlbl on board
   def move_sequence
-    winner = nil
-    until winner || @moves.empty?
-      puts @board.the_actual_board
-      move_get
-      current_player
-      system 'clear'
-      winner = check_for_winner
-      @response_message = winner if winner
+    current_player
+    @winner = check_for_winner if @moves.size <= 5
+    if @winner
+      @response_message = @winner
+    elsif @moves.empty? && @winner == false
+      @response_message = "It's a draw!"
+    else
+      @response_message = "Awesome! You have moved to space #{@move}!"
     end
+  end
+  
+  def print_board
     system 'clear'
-    puts @board.the_actual_board
-    @response_message = "It's a draw!" if @moves.empty? && winner == false
+    @response_message = @board.the_actual_board
   end
 
   # alternates turns between players
   def current_player
-    player1 = @players[0]
-    player2 = @players[1]
     alternator = @player_turn
-    @player_turn = if alternator == player1
-                     player2
-                   else
-                     player1
-                   end
+    alternator == @players[0] ? @player_turn = @players[1] : @player_turn = @players[0]
   end
 
   def move_get
@@ -64,7 +61,6 @@ class DecisionMaker
     @move = prompt.enum_select("Player #{@player_turn.symbol} make a move:", @moves)
     position_remover(@move)
     @board.print_move(@move, @player_turn.symbol)
-    @response_message = "Awesome! You have moved to space #{@move}!"
   end
 
   # removes options form the prompt as they become selected
