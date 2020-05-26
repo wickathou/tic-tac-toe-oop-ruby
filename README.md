@@ -1,41 +1,51 @@
 <!-- PROJECT LOGO -->
 # Tic-Tac-Toe-game
-A simple bubble sort algorithm created on Ruby.
+A Ruby implementation of the loved Tic Tac Toe game.
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
-* [About the Project](#about-the-project)
-  * [Features](#features)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-    * [Installation](#installation)
-    * [Usage](#usage)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+- [Tic-Tac-Toe-game](#tic-tac-toe-game)
+  - [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Tic Tac Toe in Ruby](#tic-tac-toe-in-ruby)
+  - [How to play](#how-to-play)
+  - [Features:](#features)
+    - [Built on Ruby](#built-on-ruby)
+    - [Interactive prompt system](#interactive-prompt-system)
+  - [Built With](#built-with)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 <!-- ABOUT THE PROJECT -->
 # About The Project
-## Ruby Bubble Sort
-A simple bubble sort algorithm created on Ruby from scratch showing the basic
-functionality of the bubble sort and bubble_sort using a block.
+## Tic Tac Toe in Ruby
+This is a Tic Tac Toe game, developed following the OOP paradigm and built in Ruby.
+## How to play
+* Read all instructions the game prompts carefully
+* Player 1 chooses the symbol they want to play with, player 2 will get assigned the remaining symbol
+* A prompt appears asking for the position that player 1 wants to move to
+* Once player 1 selects, player 2 will be prompted to select a position
+* The game alternates between both players until the board is full or until someone wins
 ## Features:
 ### Built on Ruby
-- You can check a website built using Ruby Bubble Sort following the link below
-Made by 
-Ara Camarillo [aracelicaes](https://github.com/aracelicaes)
-Javier Hernandez [wickathou](https://github.com/wickathou)
+- You can check the game using Ruby
+### Interactive prompt system
 **Microverse @microverse**
 ## Built With
 * Ruby
+* TTY-Prompt
+* Bundler
 <!-- GETTING STARTED -->
 # Getting started
 ## Installation
-Clone the repo at [Github Link](https://github.com/aracelicaes/bubble-sort2/tree/bubblesort)
-## Usage
-Set the array you want to sort, save and run the Ruby file.
+* Clone the repo following [this link](https://github.com/wickathou/tic-tac-toe-oop-ruby)
+* Install all dependencies running from terminal the command `bundle install`
+* Run from terminal `bin/main`
 <!-- CONTACT -->
 # Contact
-@aracelicaes - Ara Camarillo
-@wickathou - Javier Hernandez
-Project Link: [Click Here](https://github.com/aracelicaes/bubble-sort2/tree/bubblesort)
+* Ara Camarillo [aracelicaes](https://github.com/aracelicaes)
+* Javier Hernandez [wickathou](https://github.com/wickathou)
+* Project Link: [Click Here](https://github.com/wickathou/tic-tac-toe-oop-ruby)
 <!-- ACKNOWLEDGEMENTS -->
 # Acknowledgements
 - [The Odin Project](https://www.theodinproject.com)
