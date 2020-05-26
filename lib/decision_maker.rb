@@ -36,15 +36,15 @@ class DecisionMaker
   def move_sequence
     current_player
     @winner = check_for_winner if @moves.size <= 5
-    if @winner
-      @response_message = @winner
-    elsif @moves.empty? && @winner == false
-      @response_message = "It's a draw!"
-    else
-      @response_message = "Awesome! You have moved to space #{@move}!"
-    end
+    @response_message = if @winner
+                          @winner
+                        elsif @moves.empty? && @winner == false
+                          "It's a draw!"
+                        else
+                          "Awesome! You have moved to space #{@move}!"
+                        end
   end
-  
+
   def print_board
     system 'clear'
     @response_message = @board.the_actual_board
@@ -53,7 +53,7 @@ class DecisionMaker
   # alternates turns between players
   def current_player
     alternator = @player_turn
-    alternator == @players[0] ? @player_turn = @players[1] : @player_turn = @players[0]
+    @player_turn = alternator == @players[0] ? @players[1] : @players[0]
   end
 
   def move_get

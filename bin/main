@@ -35,17 +35,17 @@ class Game
       next_player
     end
   end
-  
+
   def new_move
     @decision_maker.move_get
     puts @decision_maker.response_message
   end
-  
+
   def next_player
     @decision_maker.move_sequence
     puts @decision_maker.response_message
   end
-  
+
   def board_printer
     @decision_maker.print_board
     puts @decision_maker.response_message
