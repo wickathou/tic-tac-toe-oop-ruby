@@ -23,7 +23,11 @@ class Game
 
   def start_decision_maker
     puts 'Please Select, Would you like to be Player ❌ or Player 🔵?'
-    @decision_maker = DecisionMaker.new
+    symbol_list = ['❌', '🔵']
+    prompt = TTY::Prompt.new
+    symb1 = prompt.enum_select('Player 1! Select your symbol:', symbol_list)
+    symb2 = symbol_list.reject { |x| x == symb1 }[0]
+    @decision_maker = DecisionMaker.new(symb1, symb2)
     puts @decision_maker.response_message
     board_printer
   end
