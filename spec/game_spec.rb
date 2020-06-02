@@ -55,6 +55,13 @@ require_relative '../lib/board'
     end
   end
 
+  describe "#position_remover" do
+    it "checks that the options from the prompt are being removed as they are selected" do
+      (1..9).each { |i| logic.position_remover(i.to_s) }
+      expect(logic.moves).to eq({})
+    end
+  end
+
   describe "#move_sequence" do
     it "checks for a draw when full board and no winner" do
       (1..9).each do |i|
@@ -70,5 +77,5 @@ require_relative '../lib/board'
       expect(logic.move_sequence).to eq("Awesome! You have moved to space #{@move}!")
     end
   end
-   
+
 end
