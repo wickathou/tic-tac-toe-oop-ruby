@@ -54,5 +54,16 @@ require_relative '../lib/board'
       expect(logic.current_player).not_to eq(logic.current_player)
     end
   end
+
+  describe "#move_sequence" do
+    it "checks for a draw when full board and no winner" do
+      (1..9).each do |i|
+        logic.position_remover(i.to_s)
+      end
+      expect(logic.move_sequence).to eq("It's a draw!")
+    end
+  end
+
+
   
 end
