@@ -62,8 +62,13 @@ require_relative '../lib/board'
       end
       expect(logic.move_sequence).to eq("It's a draw!")
     end
+
+    it "checks that player moves if no win or draw" do
+      (1..8).each do |i|
+        logic.position_remover(i.to_s)
+      end
+      expect(logic.move_sequence).to eq("Awesome! You have moved to space #{@move}!")
+    end
   end
-
-
-  
+   
 end
