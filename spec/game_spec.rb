@@ -1,5 +1,31 @@
+require_relative '../bin/main'
 require_relative '../lib/decision_maker'
 require_relative '../lib/board'
+
+
+describe Game do
+  describe '#Game.new' do 
+    it 'Test the complete game, player x wins' do
+      expect(Game.new('testing').test_result).to eq('Player ❌ wins')
+    end
+    
+    it 'Test the complete game, player o wins' do
+      expect(Game.new('alt').test_result).to eq('Player 🔵 wins')
+    end
+    
+    it 'Test the complete game, player x loses' do
+      expect(Game.new('altloser').test_result).to eq('Player ❌ looses')
+    end
+    
+    it 'Test the complete game, player o loses' do
+      expect(Game.new('loser').test_result).to eq('Player 🔵 looses')
+    end
+    
+    it 'Test the complete game, game is a draw' do
+      expect(Game.new('draw').test_result).to eq("It's a draw!")
+    end
+  end
+end
 
 describe DecisionMaker do
   let(:x) { '❌' }
@@ -76,6 +102,42 @@ describe DecisionMaker do
         logic.position_remover(i.to_s)
       end
       expect(logic.move_sequence).to eq("Awesome! You have moved to space #{@move}!")
+    end
+  end
+  
+  describe '#print_board' do
+    it 'Returns an instance variable assignment with the board to print' do
+      expect(logic.print_board).to eq(board.the_actual_board)
+    end
+  end
+end
+
+describe Player do
+  let(:player) { Player.new('x') }
+  describe '#to_s' do 
+    it 'Prints the player symbol directly when transforming the instance to string' do
+      expect("#{player}").to eq('x')
+    end
+  end
+end
+
+describe Board do
+  let(:board) { Board.new }
+  describe '#the_actual_board' do 
+    it 'Returns the board shape as an array for printing' do
+      expect(board.the_actual_board).to eq([
+      " 1 | 2 | 3 ",
+      '-----------',
+      " 4 | 5 | 6 ",
+      '-----------',
+      " 7 | 8 | 9 "
+    ])
+    end
+  end
+  
+  describe '#print_move' do 
+    it 'Registers the position that a player chose, by taking the number and substracting 1, then registering the position on an array' do
+      expect(board.print_move(1, 'x')).to eq(board.board[0])
     end
   end
 end

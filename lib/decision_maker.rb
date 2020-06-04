@@ -24,10 +24,6 @@ class DecisionMaker
     @response_message = "Player 1 is #{@players[0]} so Player 2 gets #{@players[1]}"
   end
 
-  def board_get
-    @board = Board.new
-  end
-
   # once games starts requests 1st move until no more spots are avlbl on board
   def move_sequence
     current_player
@@ -41,20 +37,19 @@ class DecisionMaker
                         end
   end
 
-  def print_board
-    system 'clear'
-    @response_message = @board.the_actual_board
-  end
-
   # alternates turns between players
   def current_player
     alternator = @player_turn
     @player_turn = alternator == @players[0] ? @players[1] : @players[0]
   end
 
-  def move_get
-    prompt = TTY::Prompt.new
-    @move = prompt.enum_select("Player #{@player_turn.symbol} make a move:", @moves)
+  def move_get( test_move = nil )
+    if test_move
+      @move = test_move
+    else
+      prompt = TTY::Prompt.new
+      @move = prompt.enum_select("Player #{@player_turn.symbol} make a move:", @moves)
+    end
     position_remover(@move)
     @board.print_move(@move, @player_turn.symbol)
   end
@@ -76,5 +71,16 @@ class DecisionMaker
       end
     end
     answer
+  end
+  
+  def print_board
+    # system 'clear'
+    @response_message = @board.the_actual_board
+  end
+  
+  private
+  
+  def board_get
+    @board = Board.new
   end
 end
