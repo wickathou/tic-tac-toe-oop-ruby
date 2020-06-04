@@ -43,7 +43,7 @@ class DecisionMaker
     @player_turn = alternator == @players[0] ? @players[1] : @players[0]
   end
 
-  def move_get( test_move = nil )
+  def move_get(test_move = nil)
     if test_move
       @move = test_move
     else
@@ -72,14 +72,14 @@ class DecisionMaker
     end
     answer
   end
-  
+
   def print_board
     system 'clear'
     @response_message = @board.the_actual_board
   end
-  
+
   private
-  
+
   def board_get
     @board = Board.new
   end
