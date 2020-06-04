@@ -1,28 +1,38 @@
-require_relative '../bin/main'
+require_relative '../lib/game'
 require_relative '../lib/decision_maker'
 require_relative '../lib/board'
 
 
 describe Game do
+  let(:testing) { Game.new('testing') }
+  let(:alt) { Game.new('alt') }
+  let(:altloser) { Game.new('altloser') }
+  let(:loser) { Game.new('loser') }
+  let(:draw) { Game.new('draw') }
+  let(:altdraw) { Game.new('altdraw') }
   describe '#Game.new' do 
     it 'Test the complete game, player x wins' do
-      expect(Game.new('testing').test_result).to eq('Player ❌ wins')
+      expect(testing.test_result).to eq('Player ❌ wins')
     end
     
     it 'Test the complete game, player o wins' do
-      expect(Game.new('alt').test_result).to eq('Player 🔵 wins')
+      expect(alt.test_result).to eq('Player 🔵 wins')
     end
     
     it 'Test the complete game, player x loses' do
-      expect(Game.new('altloser').test_result).to eq('Player ❌ looses')
+      expect(altloser.test_result).to eq('Player ❌ looses')
     end
     
     it 'Test the complete game, player o loses' do
-      expect(Game.new('loser').test_result).to eq('Player 🔵 looses')
+      expect(loser.test_result).to eq('Player 🔵 looses')
     end
     
     it 'Test the complete game, game is a draw' do
-      expect(Game.new('draw').test_result).to eq("It's a draw!")
+      expect(draw.test_result).to eq("It's a draw!")
+    end
+    
+    it 'Test the complete game, game is a draw but with swapped player symbols' do
+      expect(altdraw.test_result).to eq("It's a draw!")
     end
   end
 end

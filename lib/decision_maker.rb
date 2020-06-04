@@ -74,7 +74,7 @@ class DecisionMaker
   end
   
   def print_board
-    # system 'clear'
+    system 'clear'
     @response_message = @board.the_actual_board
   end
   
