@@ -17,13 +17,13 @@ class Game
     end
   end
 
+  private
+
   def new_game
     start_decision_maker
     user_input
     restart
   end
-
-  private
 
   def greeting
     puts 'Tic Tac Toe: two rivals, two symbols, only one chance to win...'
