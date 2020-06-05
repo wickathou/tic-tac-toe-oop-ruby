@@ -117,12 +117,23 @@ class Game
   def game_end_check(check)
     the_tests = %w[loser altloser]
     return unless the_tests.include?(check)
-
     case @decision_maker.response_message
     when 'Player 🔵 wins'
-      'Player ❌ looses'
+     puts 'Player ❌ looses'
     when 'Player ❌ wins'
-      'Player 🔵 looses'
+     puts 'Player 🔵 looses'
     end
   end
+
+  # def game_end_check(check)
+  #   if check == 'loser' || check == 'altloser'
+  #     case @decision_maker.response_message
+  #     when 'Player 🔵 wins'
+  #       puts 'Player ❌ looses'
+  #     when 'Player ❌ wins'
+  #       puts 'Player 🔵 looses'
+  #     end
+  #   end
+  # end
+
 end
